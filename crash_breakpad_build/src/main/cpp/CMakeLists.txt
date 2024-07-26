@@ -25,7 +25,6 @@ include_directories(libbreakpad/src libbreakpad/src/common/android/include)
 add_subdirectory(libbreakpad)
 list(APPEND LINK_LIBRARIES breakpad)
 
-add_library(breakpad-core SHARED
-        breakpad.cpp)
+add_library(breakpad-core SHARED breakpad.cpp)
 target_link_libraries(breakpad-core ${LINK_LIBRARIES}
         log)

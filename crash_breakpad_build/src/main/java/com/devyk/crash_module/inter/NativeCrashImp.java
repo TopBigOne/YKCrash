@@ -1,6 +1,7 @@
 package com.devyk.crash_module.inter;
 
 import android.content.Context;
+import android.util.Log;
 
 /**
  * <pre>
@@ -12,6 +13,7 @@ import android.content.Context;
  * </pre>
  */
 public class NativeCrashImp implements ICrash {
+    private static final String TAG = "NativeCrashImp : ";
 
     static {
         System.loadLibrary("breakpad-core");
@@ -21,6 +23,7 @@ public class NativeCrashImp implements ICrash {
 
     @Override
     public void init(Context context, String logPath) {
+        Log.d(TAG, "init: logPath : " + logPath);
         initBreakpadNative(logPath);
     }
 }

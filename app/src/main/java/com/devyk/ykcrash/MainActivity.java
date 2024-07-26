@@ -13,6 +13,8 @@ import com.devyk.crash_module.inter.JavaCrashUtils;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements JavaCrashUtils.OnCrashListener {
+    private static final String TAG = "MainActivity:";
+
     static {
         System.loadLibrary("crash-lib");
     }
@@ -22,20 +24,15 @@ public class MainActivity extends AppCompatActivity implements JavaCrashUtils.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         String nativePath = Environment.getExternalStorageDirectory() + "/CRASH/nativeCrash";
-        File natPath = new File(nativePath);
-        if (!natPath.exists())
-            natPath.mkdirs();
+        File   natPath    = new File(nativePath);
+        if (!natPath.exists()) natPath.mkdirs();
 
         String javaPath = Environment.getExternalStorageDirectory() + "/CRASH/javaCrash";
-        File javPath = new File(javaPath);
-        if (!javPath.exists())
-            javPath.mkdirs();
+        File   javPath  = new File(javaPath);
+        if (!javPath.exists()) javPath.mkdirs();
 
         //框架初始化
-        new Crash.CrashBuild(getApplicationContext())
-                .nativeCrashPath(nativePath)
-                .javaCrashPath(javaPath, this)
-                .build();
+        new Crash.CrashBuild(getApplicationContext()).nativeCrashPath(nativePath).javaCrashPath(javaPath, this).build();
 
     }
 
@@ -52,6 +49,6 @@ public class MainActivity extends AppCompatActivity implements JavaCrashUtils.On
 
     @Override
     public void onCrash(String crashInfo, Throwable e) {
-        Log.d("MainActivity", e.getMessage());
+        Log.d(TAG, e.getMessage());
     }
 }
